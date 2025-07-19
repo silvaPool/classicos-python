@@ -1,0 +1,1 @@
+Aqui serão resolvidos diversos problemas em Python. Alguns problemas podem ser resolvidos com algumas linhas de código, outros com sistemas complexos e até mesmo problemas que resvalam para o lado da inteligência artificial.
