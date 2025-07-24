@@ -31,3 +31,20 @@ acg: Codon = (Nucleotide.A, Nucleotide.C, Nucleotide.G)
 gat: Codon = (Nucleotide.G, Nucleotide.A, Nucleotide.T)
 print(linear_contains(my_gene, acg)) #true
 print(linear_contains(my_gene, gat)) #false
+
+def binary_contains(gene: Gene, key_codon: Codon) -> bool:
+    low: int = 0
+    high: int = len(gene) - 1
+    while low <= high: #enquanto ainda houver um espaço para pesquisa
+        mid: int = (low + high) // 2
+        if gene[mid] < key_codon:
+            low = mid + 1
+        elif gene[mid] > key_codon:
+            high = mid - 1
+        else:
+            return True
+
+
+my_sorted_gene: Gene = sorted(my_gene)
+print(binary_contains(my_sorted_gene, acg)) #True
+print(binary_contains(my_sorted_gene, gat)) #False
