@@ -31,3 +31,22 @@ class Maze:
        #preenche as posições inicial e final
        self._grid[start.row][start.column] = Cell.START
        self._grid[goal.row][goal.column] = Cell.GOAL
+
+    def _randomly_fill(self, rows: int, columns: int, sparseness: float):
+        for row in range(rows):
+            for column in range(columns):
+                if random.uniform(0, 1.0) < sparseness:
+                    self._grid[row][column] = Cell.BLOCKED
+
+
+
+
+
+def __str__(self) -> str:
+    output: str = ""
+    for row in self._grid:
+        output += "".join([c.value for c in row]) + "\n"
+    return output
+
+maze: Maze = Maze()
+print(maze)
