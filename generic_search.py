@@ -39,6 +39,29 @@ def binary_contains(sequence: Sequence[C], key: C) -> bool:
         return False
 
 
+
+class Node(Generic[T]):
+    def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0, heuristic: float = 0.0) -> None:
+        self.state: T = state
+        self.parent: Optional[Node] = parent
+        self.cost: float = cost
+        self.heuristic: float = heuristic
+
+    def __lt__(self, other: Node) -> bool:
+        return (self.cost + self.heuristic) < (other.cost + self.heuristic)
+
+    def dfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
+        #frontier corresponde aos lugares que ainda não visitamos
+        frontier: Stack[Node[T]] = Stack()
+        frontier.push(Node(initial, None))
+        #explored representa os lugares em que já estivemos
+        explored: Set[T] = {initial}
+
+        #continua enquanto houver mais lugares para explorar
+
+
+
+
 class Stack(Generic[T]):
     def __init__(self) -> None:
         self._container: List[T] = []
