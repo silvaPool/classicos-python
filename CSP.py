@@ -43,3 +43,24 @@ class CSP(Generic[V, D]):
             if not constraint.satisfied(assignment):
                 return False
         return True
+
+    def backtracking_search(self, assignment: Dict[V, D] = {}) -> Optional[Dict[V, D]]:
+        #assignment estará completa se todas as variáveis receberem uma
+        #atribuição (nosso caso de base)
+        if len(assignment) == len(self.variables):
+            return assignment
+
+        #obtém todas as variáveis que estão na CSP, mas não em assignment
+        unassigned = List[V] = [v for v in self.variables if v not in assignment]
+
+        #obtém todos os valores possíveis no domínio da primeira variável sem atribuição
+        first: V = unassigned[0]
+        for value in self.domains[first]:
+            local_assignment = assignment.copy()
+            local_assignment[first] = value
+            #se continuamos consistentes, fazemos uma recursão (prosseguimos)
+            if self.consistent(first, local_assignment):
+                result: Optional[Dict[V, D]] = self.backtracking_search(local_assignment)
+                #se não encontramos o resultado, faremos um backtracking
+                if result is not None:
+                    return result
